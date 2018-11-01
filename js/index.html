@@ -1,0 +1,71 @@
+<html>
+<head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+
+<script>
+/**
+ * Object.prototype.forEach() polyfill
+ * https://gomakethings.com/looping-through-objects-with-es6/
+ * @author Chris Ferdinandi
+ * @license MIT
+ */
+if (!Object.prototype.forEach) {
+	Object.defineProperty(Object.prototype, 'forEach', {
+		value: function (callback, thisArg) {
+			if (this == null) {
+				throw new TypeError('Not an object');
+			}
+			thisArg = thisArg || window;
+			for (var key in this) {
+				if (this.hasOwnProperty(key)) {
+					callback.call(thisArg, this[key], key, this);
+				}
+			}
+		}
+	});
+}
+
+class Verb{ 
+  constructor(inf, conj, tense){ 
+    this.inf = inf; 
+    this.conj = conj; 
+    this.tense = tense;
+  } 
+  get firstSingular(){ 
+    return this.conj[0];
+  }
+  get secondSingular(){ 
+    return this.conj[1]; 
+  }  
+  get thirdSingular(){ 
+    return this.conj[2]; 
+  }  
+  get firstPlural(){ 
+    return this.conj[3]; 
+  }  
+  get secondPlural(){ 
+    return this.conj[4]; 
+  }  
+  get thirdPlural(){ 
+    return this.conj[5]; 
+  }   
+}
+
+let verb_array = [];
+$.getJSON("verbs.json", function (data) {
+  var verbs = jQuery.parseJSON( data );
+  verbs.forEach(function (item, inf) { 
+    item.forEach(function(tense, conj){ 
+      verb_array.push([inf, tense, conj]);
+    }); 
+  }); 
+});
+
+console.log(verb_array);
+</script>
+</head>
+
+<body>
+
+</body>
+</html>
