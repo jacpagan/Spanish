@@ -1,11 +1,28 @@
-<!DOCTYPE html> 
-<html> 
-<head> 
-<title> Spanish Verbs </title> 
-</head>
-<body> 
-</body>
 
-<script type="text/javascript" src="js/require.js"></script>
-<script type="text/javascript" src="js/spanish_verbs.js"></script>
-</html>
+<style media="screen">
+	#btn{
+		border: black 2px solid;
+		padding: 10px;
+    width: 100px;
+    text-align:center;
+    left: 50%;
+    position: absolute;
+	}
+</style>
+
+<div id="btn">CLICK ME</div>
+<div id="output"></div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#btn').click(function(){
+      $.getJSON("http://localhost:3000/acabar", function(data){
+        $.each(data.presentIndicative, function(index, key){
+          console.log(index);
+        })
+      })
+
+	})
+})
+</script>
