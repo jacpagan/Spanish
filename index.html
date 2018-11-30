@@ -17,12 +17,9 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#btn').click(function(){
-      $.getJSON("http://localhost:3000/acabar", function(data){
-        $.each(data.presentIndicative, function(index, key){
-          console.log(index);
-        })
-      })
-
-	})
-})
+		$.getJSON("http://localhost:3000/verbs", function(data){ 
+            		console.log(data);
+		});
+  });
+});
 </script>
