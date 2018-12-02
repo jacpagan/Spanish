@@ -1,25 +1,7 @@
-
-<style media="screen">
-	#btn{
-		border: black 2px solid;
-		padding: 10px;
-    width: 100px;
-    text-align:center;
-    left: 50%;
-    position: absolute;
-	}
-</style>
-
+<!-- Run: json-server node module pointing at .json --> 
+<link rel="stylesheet" href="style.css">
 <div id="btn">CLICK ME</div>
 <div id="output"></div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
 
-<script type="text/javascript">
-$(document).ready(function(){
-	$('#btn').click(function(){
-		$.getJSON("http://localhost:3000/verbs", function(data){ 
-            		console.log(data);
-		});
-  });
-});
-</script>
+<script type="text/javascript" src="script.js"></script>
