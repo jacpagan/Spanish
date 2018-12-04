@@ -2,9 +2,8 @@
 import json
 
 
-file = open("data.txt", "r")
-
-d = {}
+file = open("tools/word_definitions.txt", "r")
+d = {} 
 for line in file:
   d[line.replace("\n", "").split(" - ")[0]] = line.replace("\n", "").split(" - ")[1]
 
