@@ -1,8 +1,6 @@
-#btn{
-    border: black 2px solid;
-    padding: 10px;
-    width: 100px;
-    text-align:center;
-    left: 50%;
-    position: absolute;
+body{
+  background-color: dodgerblue;
+}
+select{
+  font-size: 40px;
 }
