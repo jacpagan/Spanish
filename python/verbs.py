@@ -20,8 +20,10 @@ for verb in verbs:
     links = [tense["data-tense"] for tense in bsObj.findAll("a", attrs={"class":"vtable-word-text"})]
     tenses = divs + links
 
+# Find the tenses that belong to each verb
     t_dict = {}
     for tense in tenses:
+        # Find all the conjugations in each tense 
         t_dict[tense] = []
         for conj in bsObj.findAll( "a",{"data-tense":"{}".format(tense)}):
                 t_dict[tense].append(conj.text)
