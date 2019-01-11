@@ -1,13 +1,14 @@
 $(document).ready(function(){
-		var listItems = '<option selected="selected" value="0">- Select -</option>';
+	/* ROOT VERB SELECT BOX */
+		var listItems = '<option selected="selected" value="0">- ROOTS -</option>';
     for (var i = 0; i < Object.keys(verbs).length; i++) {
         	listItems += "<option>" + Object.keys(verbs)[i] + "</option>";
     }
-    $("#verbs").html(listItems);
-
-		$("#verbs").change(function(){
+    $("#roots").html(listItems);
+		$("#roots").change(function(){
 			var $verb = $(this);
-			$("#translation").html(definitions[$verb.val()]);
+			/* definitions from definitions.js */
+			$("#translation").html("<h1>"+definitions[$verb.val()]+"</h1>");
 
 			var indicative = [];
 			var subjunctive = [];
@@ -34,28 +35,26 @@ $(document).ready(function(){
 			}
 
 			var conj = '';
-			conj += '<h1> INDICATIVE </h1>';
+			conj += '<table class="table table-condensed table-striped table-hover"><tr><th colspan="2"> INDICATIVE </th></tr>';
 			for (var i = 0; i < indicative.length; i++){
-				conj += "<li><b>" + indicative[i].replace("Indicative", "") + "</b> : " + verbs[$verb.val()][indicative[i]] + "</li>";
+				conj += "<tr><td><b>" + indicative[i].replace("Indicative", "") + "</b></td><td>" + verbs[$verb.val()][indicative[i]] + "</td></tr>";
 			}
-			conj += '<h1> SUBJUNCTIVE </h1>';
+			conj += '</table><table class="table table-condensed table-striped table-hover"><tr><th colspan="2"> SUBJUNCTIVE </th></tr>';
 			for (var i = 0; i < subjunctive.length; i++){
-				conj += "<li><b>" + subjunctive[i].replace("Subjunctive", "") + "</b> : " + verbs[$verb.val()][subjunctive[i]] + "</li>";
+				conj += "<tr><td><b>" + subjunctive[i].replace("Subjunctive", "") + "</b></td><td>" + verbs[$verb.val()][subjunctive[i]] + "</td></tr>";
 			}
-			conj += '<h1> IMPERATIVE </h1>';
+			conj += '</table><table class="table table-condensed table-striped table-hover"><tr><th colspan="2"> IMPERATIVE </th></tr>';
 			for (var i = 0; i < imperative.length; i++){
-				conj += "<li><b>" + imperative[i].replace("imperative", "affirmative").replace("Imperative", "") + "</b> : " + verbs[$verb.val()][imperative[i]] + "</li>";
+				conj += "<tr><td><b>" + imperative[i].replace("imperative", "affirmative").replace("Imperative", "") + "</b></td><td>" + verbs[$verb.val()][imperative[i]] + "</td></tr>";
 			}
-			conj += '<h1> PERFECT </h1>';
+			conj += '</table><table class="table table-condensed table-striped table-hover"><tr><th colspan="2"> PERFECT </th></tr>';
 			for (var i = 0; i < perfect.length; i++){
-				conj += "<li><b>" + perfect[i].replace("Perfect", "") + "</b> : " + verbs[$verb.val()][perfect[i]] + "</li>";
+				conj += "<tr><td><b>" + perfect[i].replace("Perfect", "") + "</b></td><td>" + verbs[$verb.val()][perfect[i]] + "</td></tr>";
 			}
-			conj += '<h1> CONTINUOUS </h1>';
+			conj += '</table><table class="table table-condensed table-striped table-hover"><tr><th colspan="2"> CONTINUOUS </th></tr>';
 			for (var i = 0; i < continuous.length; i++){
-				conj += "<li><b>" + continuous[i].replace("Continuous", "") + "</b> : " + verbs[$verb.val()][continuous[i]] + "</li>";
+				conj += "<tr><td><b>" + continuous[i].replace("Continuous", "") + "</b></td><td>" + verbs[$verb.val()][continuous[i]] + "</td></tr>";
 			}
 			$("#conjugations").html(conj);
-
-
     });
 });

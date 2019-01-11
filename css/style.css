@@ -1,7 +1,18 @@
-body{
+html{
+text-align: center;
 }
-select{
+.table{
+  width: auto;
+  align:center;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
-.simple{
-/*  border: solid blue 2px;*/
+.table th{
+  text-align: center;
+}
+#translation{
+  margin:auto;
+  width:auto;
+  background-color: #ffad33;
 }
