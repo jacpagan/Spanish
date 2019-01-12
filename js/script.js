@@ -55,6 +55,7 @@ $(document).ready(function(){
 			for (var i = 0; i < continuous.length; i++){
 				conj += "<tr><td><b>" + continuous[i].replace("Continuous", "") + "</b></td><td>" + verbs[$verb.val()][continuous[i]] + "</td></tr>";
 			}
+			conj += "</table>";
 			$("#conjugations").html(conj);
     });
 });
