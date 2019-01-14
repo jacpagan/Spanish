@@ -8,7 +8,7 @@ $(document).ready(function(){
 		$("#roots").change(function(){
 			var $verb = $(this);
 			/* definitions from definitions.js */
-			$("#translation").html("<h1>"+definitions[$verb.val()]+"</h1>");
+			$("#translation").html("<h1><span>"+definitions[$verb.val()]+"</span></h1>");
 
 			var indicative = [];
 			var subjunctive = [];

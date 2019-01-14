@@ -8,9 +8,12 @@
   text-align: center;
 }
 
+h1 span {
+  background-color: #ffad33;
+}
+
 #translation{
   margin:auto;
   width:auto;
-  background-color: #ffad33;
   text-align: center;
 }
