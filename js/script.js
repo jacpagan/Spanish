@@ -16,23 +16,24 @@ $(document).ready(function(){
 			var perfect = [];
 			var continuous = [];
 			var root_verb = verbs[$verb.val()];
+			var verb_tenses = Object.keys(root_verb);
 
-			for (var i = 0; i < Object.keys(root_verb).length; i++){
-				if (Object.keys(root_verb)[i].endsWith("Indicative")){
-					indicative.push(Object.keys(root_verb)[i]);
+			for (var i = 0; i < verb_tenses.length; i++){
 
+				if (verb_tenses[i].endsWith("Indicative")){
+					indicative.push(verb_tenses[i]);
 				}
-				if (Object.keys(root_verb)[i].endsWith("Subjunctive") || Object.keys(root_verb)[i].endsWith("Subjunctive2")){
-					subjunctive.push(Object.keys(root_verb)[i]);
+				if (verb_tenses[i].endsWith("Subjunctive") || verb_tenses[i].endsWith("Subjunctive2")){
+					subjunctive.push(verb_tenses[i]);
 				}
-				if (Object.keys(root_verb)[i].endsWith("Imperative") || Object.keys(root_verb)[i] == ("imperative")){
-					imperative.push(Object.keys(root_verb)[i]);
+				if (verb_tenses[i].endsWith("Imperative") || verb_tenses[i] == ("imperative")){
+					imperative.push(verb_tenses[i]);
 				}
-				if (Object.keys(root_verb)[i].endsWith("Perfect")){
-					perfect.push(Object.keys(root_verb)[i]);
+				if (verb_tenses[i].endsWith("Perfect")){
+					perfect.push(verb_tenses[i]);
 				}
-				if (Object.keys(root_verb)[i].endsWith("Continuous")){
-					continuous.push(Object.keys(root_verb)[i]);
+				if (verb_tenses[i].endsWith("Continuous")){
+					continuous.push(verb_tenses[i]);
 				}
 			}
 
