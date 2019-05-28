@@ -7,7 +7,11 @@ $(document).ready(function(){
 		$("#roots").change(function(){
 			var $verb = $(this);
 			$("#translation").html("<h1><span>"+definitions[$verb.val()]+"</span></h1>");
-			var indicative, subjunctive, imperative, perfect, continuous = [];
+			var indicative = [];
+			var subjunctive = []; 
+			var imperative = []; 
+			var perfect = []; 
+			var continuous = [];
 			var root_verb = verbs[$verb.val()];
 			var verb_tenses = Object.keys(root_verb);
 			for (var i = 0; i < verb_tenses.length; i++){
