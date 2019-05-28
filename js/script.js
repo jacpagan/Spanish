@@ -1,32 +1,22 @@
 $(document).ready(function(){
-	/* ROOT VERB SELECT BOX */
-		var listItems = '<option selected="selected" value="0">- ROOTS -</option>';
+    var listItems = '<option selected="selected" value="0">- ROOTS -</option>';
     for (var i = 0; i < Object.keys(verbs).length; i++) {
-        	listItems += "<option>" + Object.keys(verbs)[i] + "</option>";
+        listItems += "<option>" + Object.keys(verbs)[i] + "</option>";
     }
     $("#roots").html(listItems);
 		$("#roots").change(function(){
 			var $verb = $(this);
-			/* definitions from definitions.js */
 			$("#translation").html("<h1><span>"+definitions[$verb.val()]+"</span></h1>");
-
-			var indicative = [];
-			var subjunctive = [];
-			var imperative = [];
-			var perfect = [];
-			var continuous = [];
+			var indicative, subjunctive, imperative, perfect, continuous = [];
 			var root_verb = verbs[$verb.val()];
 			var verb_tenses = Object.keys(root_verb);
-
 			for (var i = 0; i < verb_tenses.length; i++){
-
 				if (verb_tenses[i].endsWith("Indicative")){
 					indicative.push(verb_tenses[i]);
 					for (var j in root_verb[verb_tenses[i]]){
 						var verb_conjugation = root_verb[verb_tenses[i]][j];
 						console.log(verb_conjugation);
 					}
-
 				}
 				if (verb_tenses[i].endsWith("Subjunctive") || verb_tenses[i].endsWith("Subjunctive2")){
 					subjunctive.push(verb_tenses[i]);
