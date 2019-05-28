@@ -19,7 +19,6 @@ $(document).ready(function(){
 					indicative.push(verb_tenses[i]);
 					for (var j in root_verb[verb_tenses[i]]){
 						var verb_conjugation = root_verb[verb_tenses[i]][j];
-						console.log(verb_conjugation);
 					}
 				}
 				if (verb_tenses[i].endsWith("Subjunctive") || verb_tenses[i].endsWith("Subjunctive2")){
