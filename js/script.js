@@ -8,10 +8,11 @@ $(document).ready(function(){
 			var $verb = $(this);
 			$("#translation").html("<h1><span>"+definitions[$verb.val()]+"</span></h1>");
 			var indicative = [];
-			var subjunctive = []; 
-			var imperative = []; 
-			var perfect = []; 
+			var subjunctive = [];
+			var imperative = [];
+			var perfect = [];
 			var continuous = [];
+      var perfectSubjunctive = [];
 			var root_verb = verbs[$verb.val()];
 			var verb_tenses = Object.keys(root_verb);
 			for (var i = 0; i < verb_tenses.length; i++){
@@ -21,7 +22,11 @@ $(document).ready(function(){
 						var verb_conjugation = root_verb[verb_tenses[i]][j];
 					}
 				}
-				if (verb_tenses[i].endsWith("Subjunctive") || verb_tenses[i].endsWith("Subjunctive2")){
+        if (verb_tenses[i].endsWith("PerfectSubjunctive")){
+          perfectSubjunctive.push(verb_tenses[i]);
+        }
+				if (verb_tenses[i].endsWith("presentSubjunctive") || verb_tenses[i].endsWith("imperfectSubjunctive") ||
+          verb_tenses[i].endsWith("imperfectSubjunctive2") || verb_tenses[i].endsWith("futureSubjunctive")){
 					subjunctive.push(verb_tenses[i]);
 				}
 				if (verb_tenses[i].endsWith("Imperative") || verb_tenses[i] == ("imperative")){
@@ -40,22 +45,26 @@ $(document).ready(function(){
 			for (var i = 0; i < indicative.length; i++){
 				conj += "<tr><td><b>" + indicative[i].replace("Indicative", "") + "</b></td><td>" + root_verb[indicative[i]] + "</td></tr>";
 			}
-			conj += '</table><table class="table table-condensed table-striped table-hover"><tr><th colspan="2"> SUBJUNCTIVE </th></tr>';
-			for (var i = 0; i < subjunctive.length; i++){
-				conj += "<tr><td><b>" + subjunctive[i].replace("Subjunctive", "") + "</b></td><td>" + root_verb[subjunctive[i]] + "</td></tr>";
-			}
 			conj += '</table><table class="table table-condensed table-striped table-hover"><tr><th colspan="2"> IMPERATIVE </th></tr>';
 			for (var i = 0; i < imperative.length; i++){
 				conj += "<tr><td><b>" + imperative[i].replace("imperative", "affirmative").replace("Imperative", "") + "</b></td><td>" + root_verb[imperative[i]] + "</td></tr>";
 			}
+      conj += '</table><table class="table table-condensed table-striped table-hover"><tr><th colspan="2"> SUBJUNCTIVE </th></tr>';
+      for (var i = 0; i < subjunctive.length; i++){
+        conj += "<tr><td><b>" + subjunctive[i].replace("Subjunctive", "") + "</b></td><td>" + root_verb[subjunctive[i]] + "</td></tr>";
+      }
+      conj += '</table><table class="table table-condensed table-striped table-hover"><tr><th colspan="2"> PERFECT SUBJUNCTIVE </th></tr>';
+      for (var i = 0; i < perfectSubjunctive.length; i++){
+        conj += "<tr><td><b>" + perfectSubjunctive[i].replace("PerfectSubjunctive", "") + "</b></td><td>" + root_verb[perfectSubjunctive[i]] + "</td></tr>";
+      }
 			conj += '</table><table class="table table-condensed table-striped table-hover"><tr><th colspan="2"> PERFECT </th></tr>';
 			for (var i = 0; i < perfect.length; i++){
 				conj += "<tr><td><b>" + perfect[i].replace("Perfect", "") + "</b></td><td>" + root_verb[perfect[i]] + "</td></tr>";
 			}
-			conj += '</table><table class="table table-condensed table-striped table-hover"><tr><th colspan="2"> CONTINUOUS </th></tr>';
-			for (var i = 0; i < continuous.length; i++){
-				conj += "<tr><td><b>" + continuous[i].replace("Continuous", "") + "</b></td><td>" + root_verb[continuous[i]] + "</td></tr>";
-			}
+      conj += '</table><table class="table table-condensed table-striped table-hover"><tr><th colspan="2"> CONTINUOUS </th></tr>';
+      for (var i = 0; i < continuous.length; i++){
+        conj += "<tr><td><b>" + continuous[i].replace("Continuous", "") + "</b></td><td>" + root_verb[continuous[i]] + "</td></tr>";
+      }
 			conj += "</table>";
 			$("#conjugations").html(conj);
     });
