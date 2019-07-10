@@ -16,3 +16,7 @@ h1 span {
   width:auto;
   text-align: center;
 }
+
+select { 
+  width: auto;
+} 
