@@ -1,35 +1,29 @@
-.table, h1{
-  width: 100%;
+body { 
+  text-align: center;
+  background-color:lemonchiffon;
+  font-size: 24px;
+} 
+h1, 
+.table {
+  width: auto;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  margin:0;
   padding:0;
-  font-size: 32px;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
+  table-layout:fixed;
 
 }
+.table { 
+  border: 3px solid goldenrod;
+} 
 .table th { 
-  background-color: red;
+  background-color: goldenrod;
   text-align:center;
+  color: white;
 } 
 .table td{ 
-  border-left: 2px solid #000;
-  border-right: 2px solid #000;
+  border-right: 3px solid goldenrod;
 } 
-h1 span {
-  background-color: #ffad33;
-}
 
-#translation{
-  margin:auto;
-  width:auto;
-  text-align: center;
-}
-
-select { 
-  width: 50px;
-  display: block;
-  margin: 0 auto;
-} 
