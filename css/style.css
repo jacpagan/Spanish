@@ -1,9 +1,9 @@
-body { 
+body {
   text-align: center;
   background-color:lemonchiffon;
-  font-size: 24px;
-} 
-h1, 
+  font-size: 16px;
+}
+h1,
 .table {
   width: auto;
   margin-left: auto;
@@ -15,15 +15,14 @@ h1,
   table-layout:fixed;
 
 }
-.table { 
+.table {
   border: 3px solid goldenrod;
-} 
-.table th { 
+}
+.table th {
   background-color: goldenrod;
   text-align:center;
   color: white;
-} 
-.table td{ 
+}
+.table td{
   border-right: 3px solid goldenrod;
-} 
-
+}
