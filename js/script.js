@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    var listItems = '<option selected="selected" value="0">- ROOTS -</option>';
+    var listItems = '<option selected="selected" value="0">- Spanish Verb Roots -</option>';
     for (var i = 0; i < Object.keys(verbs).length; i++) {
         listItems += "<option>" + Object.keys(verbs)[i] + "</option>";
     }
