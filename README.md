@@ -1,7 +1,6 @@
-# Spanish
+# Spanish Conjugations
 Quick Lookup of 500 Spanish Conjugations
 
-1. Python que crea el objeto JSON con los verbos de SpanishDict.com
-2. Javascript para vizualizarlo en la web. 
+Python creates a JSON object from parsing the verbos from SpanishDict.com and JavaScript reads them. 
 
 
