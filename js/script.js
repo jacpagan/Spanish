@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const searchInput = document.getElementById('verb-search');
   const rootsSelect = document.getElementById('roots');
   const translationEl = document.getElementById('translation');
+  const resultsMetaEl = document.getElementById('results-meta');
   const conjugationsEl = document.getElementById('conjugations');
   const verbNames = Object.keys(verbs).sort(function (a, b) {
     return a.localeCompare(b, 'es');
@@ -111,48 +112,25 @@ document.addEventListener('DOMContentLoaded', function () {
       .toLowerCase();
   }
 
-  function filterVerbs() {
-    const query = normalize(searchInput.value);
+  function updateResultsMeta(message) {
+    resultsMetaEl.textContent = message;
+  }
 
-    visibleVerbs = verbNames.filter(function (verb) {
-      const meaning = definitions[verb] || '';
-      return (
-        normalize(verb).includes(query) ||
-        normalize(meaning).includes(query)
-      );
-    });
-
-    const nextVerb = visibleVerbs.includes(currentVerb) ? currentVerb : visibleVerbs[0] || '';
-
-    if (visibleVerbs.length === 0) {
-      rootsSelect.disabled = true;
-      rootsSelect.innerHTML = '<option value="">No verbs match this filter</option>';
-      currentVerb = '';
-      translationEl.innerHTML = `
-        <div class="verb-summary-inner">
-          <div>
-            <p class="verb-label">No results</p>
-            <h2 class="verb-name">Try another search</h2>
-          </div>
-          <p class="verb-meaning">No verb roots or meanings match "${escapeHtml(searchInput.value)}".</p>
+  function renderEmptyState(message) {
+    translationEl.innerHTML = `
+      <div class="verb-summary-inner">
+        <div>
+          <p class="verb-label">No results</p>
+          <h2 class="verb-name">Try another search</h2>
         </div>
-      `;
-      conjugationsEl.innerHTML = `
-        <div class="empty-state">
-          <strong>No matching verbs.</strong> Clear the filter or type a different root.
-        </div>
-      `;
-      return;
-    }
-
-    rootsSelect.disabled = false;
-    rootsSelect.innerHTML = visibleVerbs.map(function (verb) {
-      return `<option value="${escapeHtml(verb)}"${verb === nextVerb ? ' selected' : ''}>${escapeHtml(verb)}</option>`;
-    }).join('');
-
-    currentVerb = nextVerb;
-    rootsSelect.value = nextVerb;
-    renderVerb(nextVerb);
+        <p class="verb-meaning">${escapeHtml(message)}</p>
+      </div>
+    `;
+    conjugationsEl.innerHTML = `
+      <div class="empty-state">
+        <strong>No matches.</strong> Clear the filter or try a different root.
+      </div>
+    `;
   }
 
   function renderVerb(verbName) {
@@ -170,6 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
       `;
       conjugationsEl.innerHTML = '<div class="empty-state">Choose a verb to see conjugations.</div>';
+      updateResultsMeta('No verb selected yet.');
       return;
     }
 
@@ -184,8 +163,8 @@ document.addEventListener('DOMContentLoaded', function () {
       </div>
     `;
 
-    conjugationsEl.innerHTML = groupDefinitions
-      .map(function (group) {
+    const groupMarkup = groupDefinitions
+      .map(function (group, index) {
         const rows = group.keys
           .filter(function (key) {
             return Object.prototype.hasOwnProperty.call(rootVerb, key);
@@ -205,20 +184,64 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         return `
-          <section class="tense-group">
-            <h3>${escapeHtml(group.title)}</h3>
-            <div class="table-responsive">
-              <table class="table align-middle">
-                <tbody>
-                  ${rows}
-                </tbody>
-              </table>
+          <details class="tense-group"${index === 0 ? ' open' : ''}>
+            <summary>
+              <span class="tense-title">${escapeHtml(group.title)}</span>
+              <span class="tense-pill">${group.keys.length}</span>
+            </summary>
+            <div class="tense-body">
+              <div class="table-wrap">
+                <table class="table">
+                  <tbody>
+                    ${rows}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </section>
+          </details>
         `;
       })
       .filter(Boolean)
       .join('');
+
+    conjugationsEl.innerHTML = groupMarkup;
+    updateResultsMeta(
+      visibleVerbs.length === verbNames.length
+        ? `${visibleVerbs.length} verbs`
+        : `${visibleVerbs.length} matches`
+    );
+  }
+
+  function filterVerbs() {
+    const rawQuery = searchInput.value.trim();
+    const query = normalize(rawQuery);
+
+    visibleVerbs = verbNames.filter(function (verb) {
+      const meaning = definitions[verb] || '';
+      return (
+        normalize(verb).includes(query) ||
+        normalize(meaning).includes(query)
+      );
+    });
+
+    const nextVerb = visibleVerbs.includes(currentVerb) ? currentVerb : visibleVerbs[0] || '';
+
+    if (visibleVerbs.length === 0) {
+      rootsSelect.disabled = true;
+      rootsSelect.innerHTML = '<option value="">No verbs match this filter</option>';
+      currentVerb = '';
+      renderEmptyState(`No verb roots or meanings match "${escapeHtml(rawQuery)}".`);
+      updateResultsMeta('0 matches');
+      return;
+    }
+
+    rootsSelect.disabled = false;
+    rootsSelect.innerHTML = visibleVerbs.map(function (verb) {
+      return `<option value="${escapeHtml(verb)}"${verb === nextVerb ? ' selected' : ''}>${escapeHtml(verb)}</option>`;
+    }).join('');
+
+    rootsSelect.value = nextVerb;
+    renderVerb(nextVerb);
   }
 
   searchInput.addEventListener('input', filterVerbs);
@@ -228,9 +251,9 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    currentVerb = this.value;
     renderVerb(this.value);
   });
 
+  updateResultsMeta(`${verbNames.length} verbs`);
   filterVerbs();
 });
