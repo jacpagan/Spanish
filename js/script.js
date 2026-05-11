@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
     `;
     conjugationsEl.innerHTML = `
       <div class="empty-state">
-        <strong>No matching verbs.</strong> Clear the filter or type a different root.
+        <strong>No matches.</strong> Clear the filter or try a different root.
       </div>
     `;
   }
@@ -206,7 +206,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     conjugationsEl.innerHTML = groupMarkup;
     updateResultsMeta(
-      `Showing ${visibleVerbs.indexOf(verbName) + 1} of ${visibleVerbs.length} matching verbs.`
+      visibleVerbs.length === verbNames.length
+        ? `${visibleVerbs.length} verbs`
+        : `${visibleVerbs.length} matches`
     );
   }
 
@@ -229,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function () {
       rootsSelect.innerHTML = '<option value="">No verbs match this filter</option>';
       currentVerb = '';
       renderEmptyState(`No verb roots or meanings match "${escapeHtml(rawQuery)}".`);
-      updateResultsMeta('0 matching verbs.');
+      updateResultsMeta('0 matches');
       return;
     }
 
@@ -252,6 +254,6 @@ document.addEventListener('DOMContentLoaded', function () {
     renderVerb(this.value);
   });
 
-  updateResultsMeta(`Showing ${verbNames.length} verbs.`);
+  updateResultsMeta(`${verbNames.length} verbs`);
   filterVerbs();
 });
