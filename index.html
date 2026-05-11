@@ -3,55 +3,68 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="description"
+      content="Search and explore Spanish verb conjugations in a fast, static browser app."
+    >
     <title>Conjugatronix – Spanish Conjugations</title>
-    <!-- Bootstrap 5 (via CDN) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <!-- Custom CSS (css/style.css) -->
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <!-- Navbar (with brand "Conjugatronix") -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark site-nav">
       <div class="container">
         <a class="navbar-brand" href="#">Conjugatronix</a>
       </div>
     </nav>
 
-    <!-- Jumbotron (intro) -->
-    <div class="container mt-4">
-      <div class="p-5 mb-4 bg-light rounded-3">
-        <h1 class="display-5 fw-bold">Spanish Conjugations</h1>
-         <p class="lead">Quick lookup (and analytics) for 500 Spanish verbs. Powered by Conjugatronix.</p>
-      </div>
-    </div>
+    <main class="container py-4 py-lg-5">
+      <section class="hero card border-0 shadow-sm mb-4">
+        <div class="card-body p-4 p-lg-5">
+          <p class="eyebrow mb-2">Spanish verb lookup</p>
+          <h1 class="display-5 fw-bold mb-3">Spanish conjugations without friction</h1>
+          <p class="lead mb-3">
+            Browse Spanish verb forms, see the English meaning, and filter the list as you type.
+          </p>
+          <p class="hero-note mb-0">
+            The first matching verb loads automatically so the page is useful the moment it opens.
+          </p>
+        </div>
+      </section>
 
-    <!-- Verb Search (or dropdown) -->
-    <div class="container mt-4">
-      <div class="row">
-         <div class="col-md-6 mx-auto">
-            <select class="form-select" id="roots" aria-label="Select a verb"></select>
-         </div>
-      </div>
-    </div>
+      <section class="controls card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
+          <div class="row g-3 align-items-end">
+            <div class="col-md-5">
+              <label for="verb-search" class="form-label">Filter verbs</label>
+              <input
+                type="search"
+                class="form-control"
+                id="verb-search"
+                placeholder="Start typing a verb or meaning"
+                autocomplete="off"
+              >
+            </div>
+            <div class="col-md-7">
+              <label for="roots" class="form-label">Select a verb</label>
+              <select class="form-select" id="roots" aria-label="Select a verb"></select>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <!-- Conjugations Container (with "conjugations" div) -->
-    <div class="container mt-4">
-      <div class="row">
-         <div class="col-md-12">
-            <div id="translation" class="alert alert-info" style="display:none;"></div>
-            <div id="conjugations" class="conjugations"></div>
-         </div>
-      </div>
-    </div>
+      <section class="results" aria-live="polite">
+        <div id="translation" class="verb-summary alert alert-info" role="status">
+          Loading verbs...
+        </div>
+        <div id="conjugations" class="conjugations"></div>
+      </section>
+    </main>
 
-    <!-- Footer (with "Powered by Conjugatronix") -->
-    <footer class="container mt-5 py-3 text-center text-muted">
-       <p>Powered by Conjugatronix – Open Source Spanish Conjugations Tool</p>
+    <footer class="container py-4 text-center text-muted">
+      <p class="mb-0">Powered by Conjugatronix. Built for quick verb lookup.</p>
     </footer>
 
-    <!-- JS (defer'd) -->
-    <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="js/verbs.js"></script>
     <script defer src="js/definitions.js"></script>
     <script defer src="js/script.js"></script>
